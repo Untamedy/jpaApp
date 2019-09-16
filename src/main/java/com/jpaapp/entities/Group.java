@@ -23,6 +23,16 @@ import javax.persistence.Table;
 @Entity
 @Table
 public class Group {
+
+    public Group() {
+    }
+
+    public Group(String code, List<Student> students) {
+        this.code = code;
+        this.students = students;
+    }
+    
+    
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,7 +43,20 @@ public class Group {
     
    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Student> students;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
     
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+     
     
     
 }
