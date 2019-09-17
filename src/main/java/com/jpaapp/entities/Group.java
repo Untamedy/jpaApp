@@ -44,6 +44,16 @@ public class Group {
    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Student> students;
 
+    public int getId() {
+        return id;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+   
+   
     public String getCode() {
         return code;
     }

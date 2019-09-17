@@ -27,13 +27,21 @@ public class Student {
     public Student() {
     }
 
-    public Student(int id, String name, String lastname, int age, Group group) {
+    public Student(int id, String name, String lastname, int age, int groupId) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.age = age;
-        this.group = group;
+        this.groupId = groupId;
     }   
+
+    public Student(String name, String lastname, int age) {
+        this.name = name;
+        this.lastname = lastname;
+        this.age = age;
+    }
+    
+    
     
     
     @Id
@@ -52,8 +60,12 @@ public class Student {
     @Column
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id")
-    private Group group;
+    private int groupId;
 
+    public int getId() {
+        return id;
+    }
+    
     public String getName() {
         return name;
     }
@@ -78,12 +90,12 @@ public class Student {
         this.age = age;
     }
 
-    public Group getGroup() {
-        return group;
+    public int getGroup() {
+        return groupId;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setGroup(int groupId) {
+        this.groupId = groupId;
     }
       
     

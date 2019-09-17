@@ -5,12 +5,18 @@
  */
 package com.jpaapp;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 /**
  *
  * @author Lenovo
  */
 public class Main {
     public static void main(String [] args){
+        
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("JpaApp");
+        
         
     }
     
