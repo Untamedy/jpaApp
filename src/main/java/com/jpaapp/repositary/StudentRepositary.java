@@ -1,6 +1,7 @@
 package com.jpaapp.repositary;
 
 import com.jpaapp.entities.Student;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -27,32 +28,28 @@ public class StudentRepositary {
             transaction.begin();
             entityManager.persist(student);
             transaction.commit();
-
         } catch (Exception ex) {
             if (transaction != null) {
                 transaction.rollback();
-
             }
         }
     }
 
-    public void updateStudent(Student student) {        
+    public void updateStudent(Student student) {
         try {
-            transaction = entityManager.getTransaction();           
+            transaction = entityManager.getTransaction();
             transaction.begin();
             entityManager.persist(student);
             transaction.commit();
         } catch (Exception ex) {
             if (transaction != null) {
                 transaction.rollback();
-
             }
         }
-
     }
 
     public void deleteStudent(Student student) {
-       try {
+        try {
             transaction = entityManager.getTransaction();
             transaction.begin();
             entityManager.remove(student);
@@ -61,26 +58,52 @@ public class StudentRepositary {
             if (transaction != null) {
                 transaction.rollback();
             }
-        }  
+        }
     }
 
     public List<Student> findByLastname(String lastname) {
-        return null;
-
+        List<Student> students = new ArrayList<>();
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+            students = entityManager.createQuery("SELECT s FROM students s where s.lastname=" + lastname).getResultList();
+            transaction.commit();
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+        return students;
     }
 
     public List<Student> findByAge(int min, int max) {
-        return null;
-
+        List<Student> students = new ArrayList<>();
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+            students = entityManager.createQuery("SELECT s FROM students s WHERE s.age>" + min + " AND s.age<" + max).getResultList();
+            transaction.commit();
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+        return students;
     }
 
-    public List<Student> findByGroup(String groupCode) {
-        return null;
-
-    }
-
-    public List<Student> findByLastname(Student lastname) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Student> findByGroup(int id) {
+        List<Student> students = new ArrayList<>();
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+            students = entityManager.createQuery("SELECT s FROM students s where s.group_id=" + id).getResultList();
+            transaction.commit();
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+        return students;
     }
 
 }

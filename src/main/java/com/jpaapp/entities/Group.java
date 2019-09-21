@@ -21,7 +21,7 @@ import javax.persistence.Table;
  * @author Lenovo
  */
 @Entity
-@Table
+@Table(name = "groups")
 public class Group {
 
     public Group() {
@@ -31,6 +31,11 @@ public class Group {
         this.code = code;
         this.students = students;
     }
+
+    public Group(String code) {
+        this.code = code;
+    }
+    
     
     
     
@@ -51,8 +56,7 @@ public class Group {
     public List<Student> getStudents() {
         return students;
     }
-
-   
+  
    
     public String getCode() {
         return code;
@@ -65,6 +69,11 @@ public class Group {
 
     public void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+    @Override
+    public String toString() {
+        return "Group{" + "id=" + id + ", code=" + code + ", students=" + students + '}';
     }
      
     

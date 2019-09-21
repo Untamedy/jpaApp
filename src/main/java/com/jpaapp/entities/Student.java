@@ -21,18 +21,18 @@ import javax.persistence.Table;
  * @author Lenovo
  */
 @Entity
-@Table
+@Table(name = "students")
 public class Student {
 
     public Student() {
     }
 
-    public Student(int id, String name, String lastname, int age, int groupId) {
+    public Student(int id, String name, String lastname, int age, Group group) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.age = age;
-        this.groupId = groupId;
+        this.group = group;
     }   
 
     public Student(String name, String lastname, int age) {
@@ -57,10 +57,10 @@ public class Student {
     @Column
     private int age;
     
-    @Column
+  
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id")
-    private int groupId;
+    private Group group;
 
     public int getId() {
         return id;
@@ -90,13 +90,20 @@ public class Student {
         this.age = age;
     }
 
-    public int getGroup() {
-        return groupId;
+    public Group getGroup() {
+        return group;
     }
 
-    public void setGroup(int groupId) {
-        this.groupId = groupId;
+    public void setGroup(Group group) {
+        this.group = group;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" + "id=" + id + ", name=" + name + ", lastname=" + lastname + ", age=" + age + ", group=" + group.getCode() + '}';
+    }
+    
+    
       
     
 }
