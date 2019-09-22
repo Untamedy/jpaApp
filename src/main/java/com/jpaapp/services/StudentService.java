@@ -69,7 +69,7 @@ public class StudentService {
         return students;
     }
 
-    public Student getStudent(String lastname, String name) {
+    private Student getStudent(String lastname, String name) {
         Student student = null;
         List<Student> students = (List<Student>) studentRepositary.findByLastname(lastname);
         for (Student s : students) {
