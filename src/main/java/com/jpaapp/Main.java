@@ -27,33 +27,39 @@ public class Main {
 
         groupService.addGroup("rr_1");
         groupService.addGroup("aa_1");
+        groupService.addGroup("kk_1");
         studentService.addStudent("Jack", "Black", 18);
 
-        studentService.setGroupToStudent("Black", "Jack", "aa_1");
-        List<Student> studentsAge = studentService.findByAge(12, 20);
+      studentService.setGroupToStudent("Black", "Jack", "aa_1");
+          List<Student> studentsAge = studentService.findByAge(12, 20);
         studentsAge.forEach((s) -> {
             System.out.println(s.toString());
         });
 
-        List<Student> studentsGroup = studentService.findByGroup("rr_1");
-        studentsAge.forEach((s) -> {
+       List<Student> studentsGroup = studentService.findByGroup("rr_1");
+        studentsGroup.forEach((s) -> {
             System.out.println(s.toString());
         });
+        
+        groupService.updateGroup("aa_1", "gg_1");
 
         List<Student> studentsLastname = studentService.findByLastname("Black");
         studentsLastname.forEach((s) -> {
-            System.out.println(s.toString());
+            System.out.println("By lastname - " + s.toString());
         });
 
         groupService.updateGroup("rr_1", "ss_1");
+        
         groupService.deleteGroup("ss_1");
 
-        Group group = groupService.findByCode("aa_1");
-        System.out.println(group.toString());
+        Group group = groupService.findByCode("aa_1");    
+        if(group!=null){
+            System.out.println("Group by code-" + group.toString());
+        }
 
         List<Group> groups = groupService.selectAll();
         groups.forEach((g) -> {
-            System.out.println(g.toString());
+            System.out.println("All groups - "+ g.toString());
         });
 
     }

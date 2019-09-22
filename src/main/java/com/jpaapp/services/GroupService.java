@@ -9,6 +9,7 @@ import com.jpaapp.entities.Group;
 import com.jpaapp.repositary.GroupeRepositary;
 import com.jpaapp.repositary.StudentRepositary;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 
 /**
@@ -17,7 +18,7 @@ import javax.persistence.EntityManagerFactory;
  */
 public class GroupService {
 
-    
+    public static final Logger LOGGER = Logger.getLogger(GroupService.class.getName());
 
     private EntityManagerFactory managerFactory;
     private StudentRepositary studentService;
@@ -35,7 +36,8 @@ public class GroupService {
     public void addGroup(String code) {
         Group group = groupeRepositary.findByCode(code);
         if (group == null) {
-            groupeRepositary.addGroup(group);
+            Group newGroup = new Group(code);
+            groupeRepositary.addGroup(newGroup);
         }
     }
 
@@ -54,7 +56,10 @@ public class GroupService {
     }
 
     public Group findByCode(String groupCode) {  
-        Group group = groupeRepositary.findByCode(groupCode);        
+        Group group = groupeRepositary.findByCode(groupCode); 
+        if(group==null){
+            LOGGER.info("Group with code " + groupCode + " not found");
+        }
         return group ;
     }
 
