@@ -21,15 +21,17 @@ public class Main {
 
     public static void main(String[] args) {       
 
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("JpaAppPostgresql");
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("JpaAppMySql");
         StudentService studentService = new StudentService(factory);
         GroupService groupService = new GroupService(factory);
 
+       
+         studentService.addStudent("Jack", "Black", 18);
         groupService.addGroup("rr_1");
         groupService.addGroup("aa_1");
-        studentService.addStudent("Jack", "Black", 18);
+       
 
-        studentService.setGroupToStudent("Black", "Jack", "aa_1");
+      /*  studentService.setGroupToStudent("Black", "Jack", "aa_1");
         List<Student> studentsAge = studentService.findByAge(12, 20);
         studentsAge.forEach((s) -> {
             System.out.println(s.toString());
@@ -54,7 +56,7 @@ public class Main {
         List<Group> groups = groupService.selectAll();
         groups.forEach((g) -> {
             System.out.println(g.toString());
-        });
+        });*/
 
     }
 
