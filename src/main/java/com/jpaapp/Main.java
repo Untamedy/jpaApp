@@ -47,7 +47,7 @@ public class Main {
             if(s.getId()<=5){
                 studentService.setGroupToStudent(s.getLastname(), s.getName(), "qq_1");
             }
-            if(s.getId()>5&&s.getId()<10){
+            if(s.getId()>5&&s.getId()<=10){
                 studentService.setGroupToStudent(s.getLastname(), s.getName(), "tt_2"); 
             }
             if(s.getId()>10&&s.getId()<=15){
