@@ -58,24 +58,18 @@ public class Main {
             }
         });
         
-        
-
-       
          studentService.addStudent("Jack", "Black", 18);
         groupService.addGroup("rr_1");
         groupService.addGroup("aa_1");
-<<<<<<< HEAD
+
        
 
-      /*  studentService.setGroupToStudent("Black", "Jack", "aa_1");
-        List<Student> studentsAge = studentService.findByAge(12, 20);
-=======
+       studentService.setGroupToStudent("Black", "Jack", "aa_1");  
         groupService.addGroup("kk_1");
-        studentService.addStudent("Jack", "Black", 18);
+       
 
-      studentService.setGroupToStudent("Black", "Jack", "aa_1");
+      
           List<Student> studentsAge = studentService.findByAge(12, 20);
->>>>>>> 5e39233b54440a4cb3d3155a2b6be0cddfdfbee3
         studentsAge.forEach((s) -> {
             System.out.println(s.toString());
         });
@@ -103,13 +97,11 @@ public class Main {
 
         List<Group> groups = groupService.selectAll();
         groups.forEach((g) -> {
-<<<<<<< HEAD
-            System.out.println(g.toString());
-        });*/
-=======
-            System.out.println("All groups - "+ g.toString());
+
+            System.out.println("All groups - " + g.toString());
         });
->>>>>>> 5e39233b54440a4cb3d3155a2b6be0cddfdfbee3
+        
+        
 
     }
 

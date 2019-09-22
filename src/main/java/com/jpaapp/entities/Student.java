@@ -6,7 +6,6 @@
 package com.jpaapp.entities;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -42,9 +41,6 @@ public class Student implements Serializable {
         this.age = age;
     }
     
-    
-    
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -59,7 +55,7 @@ public class Student implements Serializable {
     private int age;
     
   
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id",nullable = true)
     private Group group;
 
