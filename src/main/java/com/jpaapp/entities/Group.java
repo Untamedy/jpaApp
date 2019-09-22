@@ -24,7 +24,7 @@ import javax.persistence.Table;
  * @author Lenovo
  */
 @Entity
-@Table(name = "groups")
+@Table(name = "mydb.groups")
 @NamedQuery(query = "SELECT g FROM Group g WHERE g.code=:code",name = "find group by code")
 public class Group implements Serializable{
 
@@ -35,6 +35,11 @@ public class Group implements Serializable{
         this.code = code;        
     }
 
+    public Group(int id, String code) {
+        this.id = id;
+        this.code = code;
+    }
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
