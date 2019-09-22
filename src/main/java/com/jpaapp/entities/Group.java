@@ -5,6 +5,8 @@
  */
 package com.jpaapp.entities;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,41 +25,32 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "groups")
-public class Group {
+@NamedQuery(query = "SELECT g FROM Group g WHERE g.code=:code",name = "find group by code")
+public class Group implements Serializable{
 
     public Group() {
     }
 
-    public Group(String code, List<Student> students) {
-        this.code = code;
-        this.students = students;
+    public Group(String code) {
+        this.code = code;        
     }
 
-    public Group(String code) {
-        this.code = code;
-    }
-    
-    
-    
-    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
     @Column
     private String code;
     
-   @OneToMany(mappedBy = "group", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private List<Student> students;
+   @OneToMany(mappedBy = "group",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+   private List<Student> students = new ArrayList<>();
+   
 
     public int getId() {
         return id;
     }
 
-    public List<Student> getStudents() {
-        return students;
-    }
-  
+   
    
     public String getCode() {
         return code;
@@ -64,16 +58,13 @@ public class Group {
 
     public void setCode(String code) {
         this.code = code;
-    }
-    
+    }    
 
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
+   
 
     @Override
     public String toString() {
-        return "Group{" + "id=" + id + ", code=" + code + ", students=" + students + '}';
+        return "Group{" + "id=" + id + ", code=" + code + '}';
     }
      
     

@@ -5,6 +5,7 @@
  */
 package com.jpaapp.entities;
 
+import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +23,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "students")
-public class Student {
+public class Student implements Serializable {
 
     public Student() {
     }
@@ -45,7 +46,7 @@ public class Student {
     
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
     @Column
@@ -58,8 +59,8 @@ public class Student {
     private int age;
     
   
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "group_id")
+    @ManyToOne
+    @JoinColumn(name = "group_id",nullable = true)
     private Group group;
 
     public int getId() {
