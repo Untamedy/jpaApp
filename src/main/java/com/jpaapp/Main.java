@@ -7,6 +7,7 @@ package com.jpaapp;
 
 import com.jpaapp.entities.Group;
 import com.jpaapp.entities.Student;
+import com.jpaapp.init.Init;
 import com.jpaapp.services.GroupService;
 import com.jpaapp.services.StudentService;
 import java.util.List;
@@ -24,6 +25,40 @@ public class Main {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("JpaAppPostgresql");
         StudentService studentService = new StudentService(factory);
         GroupService groupService = new GroupService(factory);
+        
+        
+        String stPath = "src\\main\\resources\\students.txt";
+        String grPTH = "src\\main\\resources\\groups.txt";
+        
+        Init init = new Init();
+        List<Student> st = init.createStudent(stPath);
+        List<Group> gr = init.createGroup(grPTH);
+        
+        st.forEach((s)->{
+            studentService.addStudent(s.getName(), s.getLastname(), s.getAge());
+        });
+        
+        gr.forEach((g)->{
+            groupService.addGroup(g.getCode());
+        });
+        
+        List<Student> allStudents = studentService.selectAll();
+        allStudents.forEach((s)->{
+            if(s.getId()<=5){
+                studentService.setGroupToStudent(s.getLastname(), s.getName(), "qq_1");
+            }
+            if(s.getId()>5&&s.getId()<10){
+                studentService.setGroupToStudent(s.getLastname(), s.getName(), "tt_2"); 
+            }
+            if(s.getId()>10&&s.getId()<=15){
+                studentService.setGroupToStudent(s.getLastname(), s.getName(), "zz_2");
+            }
+            if(s.getId()>15){
+                 studentService.setGroupToStudent(s.getLastname(), s.getName(), "ht_4");
+            }
+        });
+        
+        
 
         groupService.addGroup("rr_1");
         groupService.addGroup("aa_1");

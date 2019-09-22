@@ -32,9 +32,12 @@ public class GroupeRepositary {
     public void addGroup(Group group) {
         try {
             transaction = entityManager.getTransaction();
-            transaction.begin();
-            entityManager.persist(group);
-            transaction.commit();
+            Group isExistGroup = findByCode(group.getCode());
+            if (isExistGroup == null) {
+                transaction.begin();
+                entityManager.persist(group);
+                transaction.commit();
+            }
         } catch (Exception ex) {
             if (transaction != null) {
                 transaction.rollback();
@@ -46,8 +49,8 @@ public class GroupeRepositary {
     public void updateGroup(Group group, String newData) {
         try {
             transaction = entityManager.getTransaction();
-            if (group != null) {   
-                group.setCode(newData);               
+            if (group != null) {
+                group.setCode(newData);
                 transaction.begin();
                 entityManager.persist(group);
                 transaction.commit();
@@ -100,6 +103,5 @@ public class GroupeRepositary {
         }
         return groups;
     }
-    
-    
+
 }

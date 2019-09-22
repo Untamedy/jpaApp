@@ -17,9 +17,8 @@ import java.util.logging.Logger;
  */
 public class Init {
 
-    private String path;
-
-    public String parsCSV() {
+   
+    public String parsCSV(String path) {
         StringBuilder objects = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(path));) {
             String line = "";
@@ -40,8 +39,9 @@ public class Init {
         return data.split(";");
     }
 
-    public List<Student> createStudent(String data) {
+    public List<Student> createStudent(String path) {
         List<Student> students = new ArrayList<>();
+        String data = parsCSV(path);
         String[] studentsData = splitData(data);
         for (String s : studentsData) {
             String[] stData = s.split(",");
@@ -54,8 +54,9 @@ public class Init {
         return students;
     }
     
-    public List<Group> createGroup(String data){
+    public List<Group> createGroup(String path){
          List<Group> groups = new ArrayList<>();
+        String data = parsCSV(path);
         String[] groupData = splitData(data);
         for (String s : groupData) {            
             Group group = new Group();

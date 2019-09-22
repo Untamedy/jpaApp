@@ -5,6 +5,7 @@ import com.jpaapp.entities.Student;
 import com.jpaapp.repositary.GroupeRepositary;
 import com.jpaapp.repositary.StudentRepositary;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 
 /**
@@ -12,6 +13,8 @@ import javax.persistence.EntityManagerFactory;
  * @author YBolshakova
  */
 public class StudentService {
+    
+     public static final Logger LOGGER = Logger.getLogger(StudentService.class.getName());
 
     private EntityManagerFactory managerFactory;
     private StudentRepositary studentRepositary;
@@ -71,10 +74,20 @@ public class StudentService {
         List<Student> students = (List<Student>) studentRepositary.findByLastname(lastname);
         for (Student s : students) {
             if (s.getName().equals(name)) {
-                return student = s;
+                if (s.getGroup() == null) {
+                    return student = s;
+                }
             }
         }
         return student;
+    }
+    
+    public List<Student> selectAll(){
+        List<Student> students = studentRepositary.getAllStudents();
+        if(students.isEmpty()){
+         LOGGER.info("There are not any students");
+        }
+        return students;        
     }
 
 }
