@@ -22,7 +22,7 @@ public class Main {
 
     public static void main(String[] args) {       
 
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("JpaAppMySql");
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("JpaAppPostgresql");
         StudentService studentService = new StudentService(factory);
         GroupService groupService = new GroupService(factory);
         
