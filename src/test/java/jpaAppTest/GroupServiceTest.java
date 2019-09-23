@@ -29,7 +29,7 @@ public class GroupServiceTest extends Assert{
     
     @BeforeClass
     public static void init(){
-    entityManagerFactory = Persistence.createEntityManagerFactory("JpaAppPostgresql");
+    entityManagerFactory = Persistence.createEntityManagerFactory("JpaAppMySql");
     groupService = new GroupService(entityManagerFactory);
     init = new Init();
     groups = init.createGroup(grPTH);  
